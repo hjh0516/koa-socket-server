@@ -17,15 +17,20 @@
     <ul id="messages">
         메시지
     </ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
+    <form action="" id='form'>
+        <input id="channel" autocomplete="off" /><button id='channel_btn'>Channel</button>
+        <input id="m" autocomplete="off" /><button>Send</button>
     </form>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
       <script>
           $(function () {
               var socket = io('http://localhost:3000/test');
-              $('form').submit(function(){
+              $('#channel_btn').click(function(){
+                socket.emit('setChannel', 'domain');
+                  return false;
+              });
+              $('#form').submit(function(){
                 socket.emit('chat message', $('#m').val());
                   $('#m').val('');
                   return false;

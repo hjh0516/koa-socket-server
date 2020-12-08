@@ -6,12 +6,13 @@
   "scripts": {
     "tsc": "tsc",
     "start": "node ./src/app.js",
-    "test": "tsc && node ./build/test/index",
+    "test": "node ./src/app2.js",
     "temp": "tsc && node ./build/test/temp/index"
   },
   "author": "",
   "dependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.12.1",
+    "@koa/cors": "^3.1.0",
     "@types/koa": "^2.11.6",
     "dotenv": "^8.2.0",
     "koa": "^2.13.0",
