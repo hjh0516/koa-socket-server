@@ -27,17 +27,17 @@ io.of('/test')
         console.log('message: '+JSON.stringify(msg));
         // io.of('/test').emit('chat message', msg);
         socket.broadcast.to(msg.domain).emit('chat', msg);
+        socket.emit('chat', msg);
         // io.sockets.in('domain').emit('chat message', msg);
     });
     socket.on('setChannel', (channel) => {
-      socket.join(channel);
+        socket.join(channel);
         console.log('set channel '+channel);
     });
     socket.on('disconnect', () => {
         console.log('user disconnected');
     });
 });
-// Monitor port
 server.listen(3000, () => {
     console.log('listening on *:3000');
 });
