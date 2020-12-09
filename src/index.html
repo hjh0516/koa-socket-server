@@ -18,7 +18,7 @@
         메시지
     </ul>
     <form action="" id='form'>
-        <input id="channel" autocomplete="off" /><button id='channel_btn'>Channel</button>
+        <input id="channel" autocomplete="off" value="domain" /><button id='channel_btn'>Channel</button>
         <input id="m" autocomplete="off" /><button>Send</button>
     </form>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.js"></script>
@@ -26,17 +26,21 @@
       <script>
           $(function () {
               var socket = io('http://localhost:3000/test');
-              $('#channel_btn').click(function(){
-                socket.emit('setChannel', 'domain');
-                  return false;
-              });
+                socket.emit('setChannel', 'mdoctor');
               $('#form').submit(function(){
-                socket.emit('chat message', $('#m').val());
+                var msg = {
+                  "domain": "mdoctor",
+                  "chat_list_id": "125",
+                  "sender_type": "1",
+                  "message_type": "1",
+                  "message_contents": $('#m').val()
+              }
+                socket.emit('chat', msg);
                   $('#m').val('');
                   return false;
               });
-              socket.on('chat message', function(msg){
-                  $('#messages').append($('<li>').text(msg));
+              socket.on('chat', function(msg){
+                  $('#messages').append($('<li>').text(msg.message_contents));
               });
           });
       </script>

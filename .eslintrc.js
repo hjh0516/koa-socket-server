@@ -15,6 +15,5 @@ export default {
     "rules": {
       "no-unused-vars": "warn",
       "no-console": "off"
-    },
-    "parser": "babel-eslint" // Babel을 이용해서 transpiling하기 위해서 설정
+    }
   };

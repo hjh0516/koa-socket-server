@@ -9,11 +9,9 @@ const io = require('socket.io')(server, {
     }
   });
 const path = require('path');
-const cors = require('@koa/cors');
 
 const indexPath = path.join(__dirname, 'index.html');
 
-app.use(cors({ origin: "*" }));
 // Home routing
 let router = new Router();
 router.get('/', ctx => {
@@ -25,17 +23,11 @@ app.use(router.routes());
 io.of('/test')
 .on('connection', (socket) => {
   console.log('connected');
-    socket.on('chat message', (msg) => {
-        console.log('message: '+msg);
-        // io.of('/test').emit('chat message', msg);
-        socket.broadcast.to('domain').emit('chat message', msg);
-        //io.sockets.in('domain').emit('chat message', msg);
-    });
     socket.on('chat', (msg) => {
-        console.log('message2: '+msg);
+        console.log('message: '+JSON.stringify(msg));
         // io.of('/test').emit('chat message', msg);
-        socket.broadcast.to('domain2').emit('chat message', msg);
-        //io.sockets.in('domain').emit('chat message', msg);
+        socket.broadcast.to(msg.domain).emit('chat', msg);
+        // io.sockets.in('domain').emit('chat message', msg);
     });
     socket.on('setChannel', (channel) => {
       socket.join(channel);
