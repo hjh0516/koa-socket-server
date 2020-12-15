@@ -15,11 +15,13 @@ const connection = (multipleStatements = false) => {
 
 exports.excutReader = async function(
   qry,
-  condition = []) {
+  condition = [], multipleStatements = false) {
   try {
-    const conn = connection();
+    const conn = connection(multipleStatements);
     try {
       const rows = await conn.query(qry, condition);
+      if (rows[0] ==false)
+        rows[0] = null;
       return rows[0];
     } catch (err) {
       console.log('excutReader Query Error');
@@ -33,14 +35,11 @@ exports.excutReader = async function(
 
 exports.excutNonQuery = async function(
   qry,
-  condition = []) {
+  condition = [], multipleStatements = false) {
   try {
-    const conn = connection(true);
-    console.log(conn);
-
+    const conn = connection(multipleStatements);
     try {
       const rows = await conn.query(qry, condition);
-      // conn.commit();
       return rows[0];
     } catch (err) {
       console.log('excutNonQuery Query Error');
