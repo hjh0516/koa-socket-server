@@ -26,11 +26,11 @@
       <script>
           $(function () {
               var socket = io('http://localhost:3000/test');
-                socket.emit('setChannel', 'mdoctor');
+                socket.emit('setChannel', 'test');
               $('#form').submit(function(){
                 var msg = {
-                  "domain": "mdoctor",
-                  "chat_list_id": "125",
+                  "domain": "test",
+                  "chat_list_id": "1",
                   "sender_type": "1",
                   "message_type": "1",
                   "message_contents": $('#m').val()
