@@ -53,6 +53,7 @@ router.get('/chat/:domain/:user_id', async (ctx) => {
           const condition = [user_id];
 
           return database.excutNonQuery(qry, condition, true).then((res) => {
+            
             return res.insertId;
           });
         } else {

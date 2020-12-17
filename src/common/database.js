@@ -6,7 +6,7 @@ const connection = (multipleStatements = false) => {
     .createConnection({
       host: Config.Config.database_host,
       user: Config.Config.database_user,
-      port : Config.Config.database_port, 
+      port : Number(Config.Config.database_port), 
       database: global.database ?? Config.Config.database,
       password: Config.Config.database_password,
       multipleStatements: multipleStatements
