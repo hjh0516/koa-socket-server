@@ -46,7 +46,7 @@ router.get('/chat/:domain/:user_id', async (ctx) => {
           console.log('create new list');
 
           const qry = `INSERT INTO chat_lists 
-    (status, last_chat_id, user_id, account_id, first_account_id) 
+    (chat_status, last_chat_id, user_id, account_id, first_account_id) 
     VALUES (0, 0, ?, 0, 0);
     `;
 
