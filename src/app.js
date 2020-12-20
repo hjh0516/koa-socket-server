@@ -84,7 +84,7 @@ io.of('/test').on('connection', (socket) => {
 
     const qry = `INSERT INTO chats 
         (seq, chat_list_id, user_id, account_id, sender_type, message_type, message_contents) 
-        SELECT c.seq + 1, cl.id, cl.user_id, cl.account_id, ?, ?, ?
+        SELECT IFNULL(c.seq, 0) + 1, cl.id, cl.user_id, cl.account_id, ?, ?, ?
         FROM chat_lists cl
           LEFT OUTER JOIN chats c ON c.id = cl.last_chat_id
         WHERE cl.id = ?;
