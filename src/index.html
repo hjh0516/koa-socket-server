@@ -25,7 +25,7 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
       <script>
           $(function () {
-              var socket = io('ws://nia.app.appmd.co.kr/:3000/test');
+              var socket = io('ws://nia.app.appmd.co.kr:3000/test');
                 socket.emit('setChannel', 'test');
               $('#form').submit(function(){
                 var msg = {
