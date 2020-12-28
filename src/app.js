@@ -112,6 +112,10 @@ io.of('/test').on('connection', (socket) => {
     socket.join(channel);
     console.log('set channel ' + channel);
   });
+  socket.on('leaveChannel', (channel) => {
+    socket.leave(channel);
+    console.log('leave channel ' + channel);
+  });
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });

@@ -27,9 +27,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
       <script>
+       
+
           $(function () {
               var socket = io('ws://nia.app.appmd.co.kr:3000/test');
-                socket.emit('setChannel', 'test/'+$('#chat_list_id').val());
+              socket.emit('setChannel', 'test/'+$('#chat_list_id').val());
               $('#form').submit(function(){
                 var user_id = "1";
                 console.log($('#chat_list_id').val());
@@ -47,7 +49,7 @@
                   "message_type": "1",
                   "user_id" : user_id,
                   "message_contents": $('#m').val()
-              }
+                }
                 socket.emit('chat', msg);
                   $('#m').val('');
                   return false;
@@ -55,6 +57,18 @@
               socket.on('chat', function(msg){
                   $('#messages').append($('<li>').text(msg.message_contents));
                     $('#messages').scrollTop($('#messages').height());
+              });
+              $("#chat_list_id").change( function() {
+                console.log('test/'+$('#chat_list_id').val());
+                switch ($('#chat_list_id').val()) {
+                  case "23":
+                socket.emit('leaveChannel', 'test/1');
+                    break;
+                  default:
+                socket.emit('leaveChannel', 'test/23');
+                    break;
+                }
+                socket.emit('setChannel', 'test/'+$('#chat_list_id').val());
               });
           });
       </script>
