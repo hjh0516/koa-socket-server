@@ -114,7 +114,7 @@ io.of('/test').on('connection', (socket) => {
     console.log('set read ' + msg);
     const qry = `UPDATE chat SET read = 1 WHERE chat_list_id = ? and sender_type = ?`;
 
-    const conditions = [msg.chat_list_id, msg.sender_type];
+    const condition = [msg.chat_list_id, msg.sender_type];
 
     database.excutNonQuery(qry, condition, true).then((res) => {
       console.log('read updated');
