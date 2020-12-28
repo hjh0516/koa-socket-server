@@ -78,6 +78,9 @@ io.of('/test').on('connection', (socket) => {
   socket.on('chat', (msg) => {
     console.log('message: ' + JSON.stringify(msg));
 
+    if (msg.sender_type == "2") {
+      socket.broadcast.to(msg.domain+'/'+msg.chat_list_id).emit('chat', msg);
+    }
     socket.broadcast.to(msg.domain).emit('chat', msg);
 
     setDomain(msg.domain);
