@@ -17,17 +17,35 @@
     <ul id="messages" style="overflow: auto; height: 700px;">
         메시지
     </ul>
-    <form action="" id='form'>
-      <select id="chat_list_id">
-        <option value="1">토마스</option>
-        <option value="23">에이든</option>
-      </select>
-        <input id="m" autocomplete="off" /><button>Send</button>
+    <form action="" id='form' style="float: left;">
+      <div class="form-inline form-group" >
+            <input type="checkbox" id='auto_chat' style="background-color: #eee;"><font style="color: #eee;">자동채팅</font>
+            <input id='interval' style='width:50px;' value='3000'>
+            <select id="chat_list_id">
+              <option value="1">토마스</option>
+              <option value="23">에이든</option>
+            </select>
+            <input id="m" autocomplete="off" style='width:300px;'/><button>Send</button>
+      </div>
     </form>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
       <script>
-       
+var interval = null;
+$("#auto_chat").change( function() {
+  console.log($("#auto_chat").is(":checked"));
+  if($("#auto_chat").is(":checked"))
+        interval = setInterval(function(){autoChat()},Number($('#interval').val()));
+        else
+        clearInterval(interval);
+
+});
+
+       function autoChat() {
+          console.log('test');
+          $('#m').val('test');
+          $('#form').submit();
+    }
 
           $(function () {
               var socket = io('ws://nia.app.appmd.co.kr:3000/test');
