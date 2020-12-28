@@ -14,11 +14,14 @@
     </style>
   </head>
   <body>
-    <ul id="messages">
+    <ul id="messages" style="overflow: auto; height: 700px;">
         메시지
     </ul>
     <form action="" id='form'>
-        <input id="channel" autocomplete="off" value="domain" /><button id='channel_btn'>Channel</button>
+      <select id="chat_list_id">
+        <option value="1">토마스</option>
+        <option value="23">에이든</option>
+      </select>
         <input id="m" autocomplete="off" /><button>Send</button>
     </form>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.js"></script>
@@ -28,12 +31,21 @@
               var socket = io('ws://nia.app.appmd.co.kr:3000/test');
                 socket.emit('setChannel', 'test');
               $('#form').submit(function(){
+                var user_id = "1";
+                console.log($('#chat_list_id').val());
+                switch ($('#chat_list_id').val()) {
+                  case "23":
+                    user_id = "27";
+                    break;
+                  default:
+                    break;
+                }
                 var msg = {
                   "domain": "test",
-                  "chat_list_id": "1",
+                  "chat_list_id": $('#chat_list_id').val(),
                   "sender_type": "1",
                   "message_type": "1",
-                  "user_id" : "1",
+                  "user_id" : user_id,
                   "message_contents": $('#m').val()
               }
                 socket.emit('chat', msg);
@@ -42,6 +54,7 @@
               });
               socket.on('chat', function(msg){
                   $('#messages').append($('<li>').text(msg.message_contents));
+                    $('#messages').scrollTop($('#messages').height());
               });
           });
       </script>
