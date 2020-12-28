@@ -108,6 +108,18 @@ io.of('/test').on('connection', (socket) => {
     });
     // io.sockets.in('domain').emit('chat message', msg);
   });
+
+  socket.on('setRead', (msg) => {
+    setDomain(msg.domain);
+    console.log('set read ' + msg);
+    const qry = `UPDATE chat SET read = 1 WHERE chat_list_id = ? and sender_type = ?`;
+
+    const conditions = [msg.chat_list_id, msg.sender_type];
+
+    database.excutNonQuery(qry, condition, true).then((res) => {
+      console.log('read updated');
+    });
+  });
   socket.on('setChannel', (channel) => {
     socket.join(channel);
     console.log('set channel ' + channel);
