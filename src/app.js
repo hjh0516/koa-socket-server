@@ -86,8 +86,8 @@ io.of('/test').on('connection', (socket) => {
     setDomain(msg.domain);
 
     const qry = `INSERT INTO chats 
-        (seq, chat_list_id, user_id, account_id, sender_type, message_type, message_contents) 
-        SELECT IFNULL(c.seq, 0) + 1, cl.id, cl.user_id, cl.account_id, ?, ?, ?
+        (seq, chat_list_id, user_id, account_id, sender_type, message_type, message_contents, remote_path) 
+        SELECT IFNULL(c.seq, 0) + 1, cl.id, cl.user_id, cl.account_id, ?, ?, ?, ?
         FROM chat_lists cl
           LEFT OUTER JOIN chats c ON c.id = cl.last_chat_id
         WHERE cl.id = ?;
@@ -99,6 +99,7 @@ io.of('/test').on('connection', (socket) => {
       msg.sender_type,
       msg.message_type,
       msg.message_contents,
+      msg.remote_path,
       msg.chat_list_id,
       msg.chat_list_id,
     ];
