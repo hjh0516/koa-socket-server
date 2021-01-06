@@ -126,10 +126,10 @@ io.of('/test').on('connection', (socket) => {
       console.log('read updated');
     });
   });
-  // socket.on('setChannel', (channel) => {
-  //   socket.join(channel);
-  //   console.log('set channel ' + channel);
-  // });
+  socket.on('setChannel', (channel) => {
+    socket.join(channel);
+    console.log('set channel ' + channel);
+  });
   socket.on('leaveChannel', (channel) => {
     socket.leave(channel);
     console.log('leave channel ' + channel);
