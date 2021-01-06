@@ -109,6 +109,11 @@ io.of('/test').on('connection', (socket) => {
     });
     // io.sockets.in('domain').emit('chat message', msg);
   });
+  socket.on('pay', (msg) => {
+    socket.broadcast.to(msg.domain+'/'+msg.chat_list_id).emit('pay', msg);
+    socket.broadcast.to(msg.domain).emit('pay', msg);
+    socket.emit('pay', msg);
+  });
 
   socket.on('setRead', (msg) => {
     setDomain(msg.domain);
