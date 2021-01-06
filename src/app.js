@@ -127,8 +127,11 @@ io.of('/test').on('connection', (socket) => {
     });
   });
   socket.on('setChannel', (channel) => {
-    socket.join(channel);
+    //socket.join(channel);
+    socket.join('test');
+    
     console.log('set channel ' + channel);
+    console.log('join test');
   });
   socket.on('leaveChannel', (channel) => {
     socket.leave(channel);
