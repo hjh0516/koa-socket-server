@@ -117,7 +117,8 @@ io.of('/test').on('connection', (socket) => {
   });
 
   socket.on('setRead', (msg) => {
-    setDomain(msg.domain);
+    // setDomain(msg.domain);
+    setDomain('test');
     console.log('set read ' + msg);
     const qry = `UPDATE chats SET is_read = 1 WHERE chat_list_id = ? and sender_type = ?`;
 
