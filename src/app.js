@@ -112,6 +112,7 @@ io.of('/test').on('connection', (socket) => {
   socket.on('pay', (msg) => {
     socket.broadcast.to(msg.domain+'/'+msg.chat_list_id).emit('pay', msg);
     socket.broadcast.to(msg.domain).emit('pay', msg);
+    console.log(msg);
     socket.emit('pay', msg);
   });
 
