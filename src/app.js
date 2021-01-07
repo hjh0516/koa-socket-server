@@ -113,6 +113,14 @@ io.of('/test').on('connection', (socket) => {
     socket.broadcast.to(msg.domain+'/'+msg.chat_list_id).emit('pay', msg);
     socket.broadcast.to(msg.domain).emit('pay', msg);
     console.log(msg);
+
+    const qry = `UPDATE chat_lists SET pay_status = ? WHERE id = ?;`;
+
+    const condition = [msg.pay_status, msg.chat_list_id];
+
+    database.excutNonQuery(qry, condition, true).then((res) => {
+      console.log('pay updated');
+    });
     socket.emit('pay', msg);
   });
 
