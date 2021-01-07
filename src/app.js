@@ -83,7 +83,8 @@ io.of('/test').on('connection', (socket) => {
     }
     socket.broadcast.to(msg.domain).emit('chat', msg);
 
-    setDomain(msg.domain);
+    // setDomain(msg.domain);
+    setDomain('test');
 
     const qry = `INSERT INTO chats 
         (seq, chat_list_id, user_id, account_id, sender_type, message_type, message_contents, remote_path) 
@@ -114,11 +115,13 @@ io.of('/test').on('connection', (socket) => {
     socket.broadcast.to(msg.domain).emit('pay', msg);
     console.log(msg);
 
+    setDomain(msg.domain);
+    setDomain('test');
     const qry = `UPDATE chat_lists SET pay_status = ? WHERE id = ?;`;
 
     const condition = [msg.pay_status, msg.chat_list_id];
 
-    database.excutNonQuery(qry, condition, true).then((res) => {
+    database.excutNonQuery(qry, condition).then((res) => {
       console.log('pay updated');
     });
     socket.emit('pay', msg);
