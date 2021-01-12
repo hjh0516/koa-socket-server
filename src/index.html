@@ -77,16 +77,16 @@ $("#auto_chat").change( function() {
                     $('#messages').scrollTop($('#messages').height());
               });
               $("#chat_list_id").change( function() {
-                console.log('test/'+$('#chat_list_id').val());
+                console.log('7/'+$('#chat_list_id').val());
                 switch ($('#chat_list_id').val()) {
                   case "23":
-                socket.emit('leaveChannel', 'test/1');
+                socket.emit('leaveChannel', '7/1');
                     break;
                   default:
-                socket.emit('leaveChannel', 'test/23');
+                socket.emit('leaveChannel', '7/23');
                     break;
                 }
-                socket.emit('setChannel', 'test/'+$('#chat_list_id').val());
+                socket.emit('setChannel', '7/'+$('#chat_list_id').val());
               });
           });
       </script>
