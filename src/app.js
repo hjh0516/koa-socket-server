@@ -140,8 +140,7 @@ io.of('/test').on('connection', (socket) => {
     });
   });
   socket.on('setChannel', (channel) => {
-    //socket.join(channel);
-    socket.join('7');
+    socket.join(channel);
     
     console.log('set channel ' + channel);
     console.log('join 7');
