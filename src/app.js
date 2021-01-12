@@ -84,7 +84,7 @@ io.of('/test').on('connection', (socket) => {
     socket.broadcast.to(msg.domain).emit('chat', msg);
 
     // setDomain(msg.domain);
-    setDomain('test');
+    setDomain('7');
 
     const qry = `INSERT INTO chats 
         (seq, chat_list_id, user_id, account_id, sender_type, message_type, message_contents, remote_path) 
@@ -116,7 +116,7 @@ io.of('/test').on('connection', (socket) => {
     console.log(msg);
 
     setDomain(msg.domain);
-    setDomain('test');
+    setDomain('7');
     const qry = `UPDATE chat_lists SET pay_status = ? WHERE id = ?;`;
 
     const condition = [msg.pay_status, msg.chat_list_id];
@@ -129,7 +129,7 @@ io.of('/test').on('connection', (socket) => {
 
   socket.on('setRead', (msg) => {
     // setDomain(msg.domain);
-    setDomain('test');
+    setDomain('7');
     console.log('set read ' + msg);
     const qry = `UPDATE chats SET is_read = 1 WHERE chat_list_id = ? and sender_type = ?`;
 
@@ -141,10 +141,10 @@ io.of('/test').on('connection', (socket) => {
   });
   socket.on('setChannel', (channel) => {
     //socket.join(channel);
-    socket.join('test');
+    socket.join('7');
     
     console.log('set channel ' + channel);
-    console.log('join test');
+    console.log('join 7');
   });
   socket.on('leaveChannel', (channel) => {
     socket.leave(channel);
