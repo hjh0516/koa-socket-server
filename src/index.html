@@ -19,6 +19,7 @@
     </ul>
     <form action="" id='form' style="float: left;">
       <div class="form-inline form-group" >
+        <input id='domain' style='width:50px;' value='7'>
             <input type="checkbox" id='auto_chat' style="background-color: #eee;"><font style="color: #eee;">자동채팅</font>
             <input id='interval' style='width:50px;' value='3000'>
             <select id="chat_list_id">
@@ -49,7 +50,7 @@ $("#auto_chat").change( function() {
 
           $(function () {
               var socket = io('wss://dolboda.co.kr:3000/test');
-              socket.emit('setChannel', 'test/'+$('#chat_list_id').val());
+              socket.emit('setChannel', $('#domain').val()+'/'+$('#chat_list_id').val());
               $('#form').submit(function(){
                 var user_id = "1";
                 console.log($('#chat_list_id').val());
@@ -61,7 +62,7 @@ $("#auto_chat").change( function() {
                     break;
                 }
                 var msg = {
-                  "domain": "test",
+                  "domain": $('#domain').val(),
                   "chat_list_id": $('#chat_list_id').val(),
                   "sender_type": "1",
                   "message_type": "1",
@@ -77,16 +78,16 @@ $("#auto_chat").change( function() {
                     $('#messages').scrollTop($('#messages').height());
               });
               $("#chat_list_id").change( function() {
-                console.log('test/'+$('#chat_list_id').val());
+                console.log($('#domain').val()+'/'+$('#chat_list_id').val());
                 switch ($('#chat_list_id').val()) {
                   case "23":
-                socket.emit('leaveChannel', 'test/1');
+                socket.emit('leaveChannel', $('#domain').val()+'/1');
                     break;
                   default:
-                socket.emit('leaveChannel', 'test/23');
+                socket.emit('leaveChannel', $('#domain').val()+'/23');
                     break;
                 }
-                socket.emit('setChannel', 'test/'+$('#chat_list_id').val());
+                socket.emit('setChannel', $('#domain').val()+'/'+$('#chat_list_id').val());
               });
           });
       </script>
