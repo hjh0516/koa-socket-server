@@ -49,7 +49,7 @@ $("#auto_chat").change( function() {
 
           $(function () {
               var socket = io('wss://nia.app.appmd.co.kr:3000/test');
-              socket.emit('setChannel', '7/'+$('#chat_list_id').val());
+              socket.emit('setChannel', 'test/'+$('#chat_list_id').val());
               $('#form').submit(function(){
                 var user_id = "1";
                 console.log($('#chat_list_id').val());
@@ -61,7 +61,7 @@ $("#auto_chat").change( function() {
                     break;
                 }
                 var msg = {
-                  "domain": "7",
+                  "domain": "test",
                   "chat_list_id": $('#chat_list_id').val(),
                   "sender_type": "1",
                   "message_type": "1",
@@ -77,16 +77,16 @@ $("#auto_chat").change( function() {
                     $('#messages').scrollTop($('#messages').height());
               });
               $("#chat_list_id").change( function() {
-                console.log('7/'+$('#chat_list_id').val());
+                console.log('test/'+$('#chat_list_id').val());
                 switch ($('#chat_list_id').val()) {
                   case "23":
-                socket.emit('leaveChannel', '7/1');
+                socket.emit('leaveChannel', 'test/1');
                     break;
                   default:
                 socket.emit('leaveChannel', '7/23');
                     break;
                 }
-                socket.emit('setChannel', '7/'+$('#chat_list_id').val());
+                socket.emit('setChannel', 'test/'+$('#chat_list_id').val());
               });
           });
       </script>
