@@ -48,7 +48,7 @@ $("#auto_chat").change( function() {
     }
 
           $(function () {
-              var socket = io('wss://nia.app.appmd.co.kr:3000/test');
+              var socket = io('wss://dolboda.co.kr:3000/test');
               socket.emit('setChannel', 'test/'+$('#chat_list_id').val());
               $('#form').submit(function(){
                 var user_id = "1";
@@ -83,7 +83,7 @@ $("#auto_chat").change( function() {
                 socket.emit('leaveChannel', 'test/1');
                     break;
                   default:
-                socket.emit('leaveChannel', '7/23');
+                socket.emit('leaveChannel', 'test/23');
                     break;
                 }
                 socket.emit('setChannel', 'test/'+$('#chat_list_id').val());
