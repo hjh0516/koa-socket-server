@@ -2,7 +2,20 @@ const Koa = require('koa');
 const app = new Koa();
 const Router = require('koa-router');
 const fs = require('fs');
-const server = require('http').createServer(app.callback());
+
+const https = require('https');
+
+const options = {
+  key: fs.readFileSync('../ssl/privkey.pem'),
+  cert: fs.readFileSync('../ssl/fullchain.pem')
+};
+
+let serverCallback = app.callback();
+
+// const server = require('http').createServer(app.callback());
+
+var server = https.createServer(options, serverCallback);
+
 const io = require('socket.io')(server, {
   cors: {
     origin: '*',
@@ -153,6 +166,10 @@ io.of('/test').on('connection', (socket) => {
     console.log('user disconnected');
   });
 });
+// server.listen(3000, () => {
+//   console.log('listening on *:3000');
+// });
+
 server.listen(3000, () => {
-  console.log('listening on *:3000');
+  console.log('listening to port 4000');
 });
