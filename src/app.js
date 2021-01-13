@@ -6,8 +6,8 @@ const fs = require('fs');
 const https = require('https');
 
 const options = {
-  key: fs.readFileSync('../ssl/privkey.pem'),
-  cert: fs.readFileSync('../ssl/fullchain.pem')
+  key: fs.readFileSync('../../ssl/privkey.pem'),
+  cert: fs.readFileSync('../../ssl/fullchain.pem')
 };
 
 let serverCallback = app.callback();
