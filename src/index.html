@@ -48,7 +48,7 @@ $("#auto_chat").change( function() {
     }
 
           $(function () {
-              var socket = io('ws://nia.app.appmd.co.kr:3000/test');
+              var socket = io('wss://nia.app.appmd.co.kr:3000/test');
               socket.emit('setChannel', '7/'+$('#chat_list_id').val());
               $('#form').submit(function(){
                 var user_id = "1";
