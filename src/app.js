@@ -97,7 +97,6 @@ io.of('/test').on('connection', (socket) => {
     socket.broadcast.to(msg.domain).emit('chat', msg);
 
     setDomain(msg.domain);
-    // setDomain('7');
 
     const qry = `INSERT INTO chats 
         (seq, chat_list_id, user_id, account_id, sender_type, message_type, message_contents, remote_path) 
