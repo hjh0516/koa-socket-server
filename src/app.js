@@ -143,7 +143,7 @@ io.of('/test').on('connection', (socket) => {
     setDomain(msg.domain);
     // setDomain('7');
     console.log('set read ' + msg);
-    if(msg.sender_type == 2){
+    if(msg.read_type == 2){
       const sender_type = 1;
     }else{
       const sender_type = 2;
