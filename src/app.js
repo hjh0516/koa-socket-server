@@ -143,9 +143,14 @@ io.of('/test').on('connection', (socket) => {
     setDomain(msg.domain);
     // setDomain('7');
     console.log('set read ' + msg);
+    if(msg.sender_type == 2){
+      const sender_type = 1;
+    }else{
+      const sender_type = 2;
+    }
     const qry = `UPDATE chats SET is_read = 1 WHERE chat_list_id = ? and sender_type = ?`;
 
-    const condition = [msg.chat_list_id, msg.sender_type];
+    const condition = [msg.chat_list_id, sender_type];
 
     database.excutNonQuery(qry, condition, true).then((res) => {
       console.log('read updated');
